@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="patrol">
+
+  <!-- Geometric parameters, in meters. Coordinates: X forward, Y left, Z up. -->
+  <xacro:property name="wheelbase" value="1.2"/>
+  <xacro:property name="track_width" value="0.7"/>
+  <xacro:property name="wheel_radius" value="0.15"/>
+  <xacro:property name="wheel_width" value="0.08"/>
+  <xacro:property name="wheel_mass" value="2.0"/>
+  <xacro:property name="chassis_length" value="1.25"/>
+  <xacro:property name="chassis_width" value="0.55"/>
+  <xacro:property name="chassis_height" value="0.20"/>
+  <xacro:property name="chassis_mass" value="35.0"/>
+  <xacro:property name="steering_limit" value="0.52"/>
+
+  <material name="wheel_black"><color rgba="0.05 0.05 0.05 1"/></material>
+  <material name="chassis_white"><color rgba="0.9 0.9 0.9 1"/></material>
+
+  <xacro:include filename="$(find ugv_description)/urdf/chassis.xacro"/>
+  <xacro:include filename="$(find ugv_description)/urdf/wheels.xacro"/>
+
+  <xacro:chassis/>
+  <xacro:front_wheel side="left"  x="${ wheelbase / 2}" y="${ track_width / 2}"/>
+  <xacro:front_wheel side="right" x="${ wheelbase / 2}" y="${-track_width / 2}"/>
+  <xacro:rear_wheel  side="left"  x="${-wheelbase / 2}" y="${ track_width / 2}"/>
+  <xacro:rear_wheel  side="right" x="${-wheelbase / 2}" y="${-track_width / 2}"/>
+</robot>
