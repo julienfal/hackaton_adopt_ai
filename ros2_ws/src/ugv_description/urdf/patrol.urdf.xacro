@@ -18,10 +18,26 @@
 
   <xacro:include filename="$(find ugv_description)/urdf/chassis.xacro"/>
   <xacro:include filename="$(find ugv_description)/urdf/wheels.xacro"/>
+  <xacro:include filename="$(find ugv_description)/urdf/ros2_control.xacro"/>
 
   <xacro:chassis/>
   <xacro:front_wheel side="left"  x="${ wheelbase / 2}" y="${ track_width / 2}"/>
   <xacro:front_wheel side="right" x="${ wheelbase / 2}" y="${-track_width / 2}"/>
   <xacro:rear_wheel  side="left"  x="${-wheelbase / 2}" y="${ track_width / 2}"/>
   <xacro:rear_wheel  side="right" x="${-wheelbase / 2}" y="${-track_width / 2}"/>
+
+  <!-- Launch-time configuration -->
+  <xacro:arg name="use_gazebo" default="false"/>
+  <xacro:arg name="controllers_file" default=""/>
+
+  <!-- Include Gazebo configuration -->
+  <xacro:include filename="$(find ugv_description)/urdf/gazebo.xacro"/>
+
+  <!-- Enable the Gazebo plugin only for simulation -->
+  <xacro:if value="$(arg use_gazebo)">
+      <xacro:patrol_gazebo_control
+          controller_config="$(arg controllers_file)"/>
+  </xacro:if>
+
+
 </robot>
