@@ -30,6 +30,6 @@ def generate_launch_description():
             executable='rviz2',
             output='screen',
             arguments=['-d', os.path.join(
-                description_dir, 'rviz', 'display.rviz')],
+                description_dir, 'rviz', 'patrol.rviz')],
         ),
     ])

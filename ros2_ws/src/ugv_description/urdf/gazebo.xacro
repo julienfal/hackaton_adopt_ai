@@ -12,6 +12,10 @@
                 name="gz_ros2_control::GazeboSimROS2ControlPlugin">
 
                 <parameters>${controller_config}</parameters>
+                <ros>
+                    <!-- TF2 listens on /tf; this controller publishes ~/tf_odometry. -->
+                    <remapping>/ackermann_steering_controller/tf_odometry:=/tf</remapping>
+                </ros>
 
             </plugin>
         </gazebo>

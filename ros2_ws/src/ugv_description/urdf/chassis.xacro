@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="chassis" params="">
+    <!-- Massless reference frame for rear-drive Ackermann odometry and Pure Pursuit. -->
+    <link name="rear_axle"/>
+    <joint name="rear_axle_to_base_link" type="fixed">
+      <parent link="rear_axle"/>
+      <child link="base_link"/>
+      <origin xyz="${wheelbase / 2} 0 0" rpy="0 0 0"/>
+    </joint>
+
     <!-- base_link is midway between the axles, at wheel-axle height.
          The body geometry and estimated center of mass are raised above it. -->
     <link name="base_link">

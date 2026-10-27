@@ -33,7 +33,9 @@ ackermann_steering_controller:
     open_loop: false
     position_feedback: false
 
-    base_frame_id: base_link
+    # The controller integrates the rear traction-axle center pose.
+    # robot_state_publisher supplies rear_axle -> base_link from the URDF.
+    base_frame_id: rear_axle
     odom_frame_id: odom
     enable_odom_tf: true
 
