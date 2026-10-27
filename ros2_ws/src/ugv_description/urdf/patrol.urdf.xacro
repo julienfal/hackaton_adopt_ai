@@ -1,17 +1,30 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="patrol">
 
-  <!-- Geometric parameters, in meters. Coordinates: X forward, Y left, Z up. -->
-  <xacro:property name="wheelbase" value="1.2"/>
-  <xacro:property name="track_width" value="0.7"/>
-  <xacro:property name="wheel_radius" value="0.15"/>
-  <xacro:property name="wheel_width" value="0.08"/>
+  <!-- HUNTER 2.0 manual: specification table p.1 and dimension drawing p.16.
+       SI units; X forward, Y left, Z up. See ros2_ws/docs/HUNTER_2_MODEL.md.
+       Keep controller wheelbase, track and radii synchronized with these values. -->
+  <xacro:property name="wheelbase" value="0.650"/>
+  <xacro:property name="track_width" value="0.605"/>
+  <xacro:property name="wheel_radius" value="0.165"/>
+  <xacro:property name="wheel_width" value="0.140"/>
+  <xacro:property name="ground_clearance" value="0.105"/>
+  <!-- Table says 380 mm, drawing says 375 mm: use the larger envelope. -->
+  <xacro:property name="vehicle_height" value="0.380"/>
+  <!-- Simplified body: 760 mm length and 270 mm upper-body span from drawing.
+       The real body is tapered; this box is not a measured maximum body width. -->
+  <xacro:property name="chassis_length" value="0.760"/>
+  <xacro:property name="chassis_width" value="0.270"/>
+  <xacro:property name="chassis_height" value="${vehicle_height - ground_clearance}"/>
+  <xacro:property name="chassis_center_z" value="${ground_clearance + chassis_height / 2 - wheel_radius}"/>
+  <!-- Default to the manual's 65 kg variant. Individual link masses are estimates. -->
+  <xacro:property name="vehicle_mass" value="65.0"/>
   <xacro:property name="wheel_mass" value="2.0"/>
-  <xacro:property name="chassis_length" value="1.25"/>
-  <xacro:property name="chassis_width" value="0.55"/>
-  <xacro:property name="chassis_height" value="0.20"/>
-  <xacro:property name="chassis_mass" value="35.0"/>
-  <xacro:property name="steering_limit" value="0.52"/>
+  <xacro:property name="steering_knuckle_mass" value="0.5"/>
+  <xacro:property name="chassis_mass" value="${vehicle_mass - 4 * wheel_mass - 2 * steering_knuckle_mass}"/>
+  <!-- Provisional individual wheel-joint bound, not a bicycle steering angle.
+       The manual quotes 33 degrees without a precise reference-point definition. -->
+  <xacro:property name="steering_limit" value="${33.0 * pi / 180.0}"/>
 
   <material name="wheel_black"><color rgba="0.05 0.05 0.05 1"/></material>
   <material name="chassis_white"><color rgba="0.9 0.9 0.9 1"/></material>

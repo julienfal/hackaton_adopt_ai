@@ -1,16 +1,20 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="chassis" params="">
-    <!-- base_link is at the chassis center, at wheel-axle height. -->
+    <!-- base_link is midway between the axles, at wheel-axle height.
+         The body geometry and estimated center of mass are raised above it. -->
     <link name="base_link">
       <visual>
+        <origin xyz="0 0 ${chassis_center_z}"/>
         <geometry><box size="${chassis_length} ${chassis_width} ${chassis_height}"/></geometry>
         <material name="chassis_white"/>
       </visual>
       <collision>
+        <origin xyz="0 0 ${chassis_center_z}"/>
         <geometry><box size="${chassis_length} ${chassis_width} ${chassis_height}"/></geometry>
       </collision>
       <inertial>
+        <origin xyz="0 0 ${chassis_center_z}"/>
         <mass value="${chassis_mass}"/>
         <!-- Solid rectangular box, principal inertia about its center. -->
         <inertia

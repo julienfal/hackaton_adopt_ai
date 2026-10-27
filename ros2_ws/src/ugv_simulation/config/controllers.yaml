@@ -12,12 +12,12 @@ ackermann_steering_controller:
     # Controller implementation
     type: ackermann_steering_controller/AckermannSteeringController
 
-    # Vehicle geometry (metres)
-    wheelbase: 1.2
-    traction_track_width: 0.7
-    steering_track_width: 0.7
-    traction_wheels_radius: 0.15
-    steering_wheels_radius: 0.15
+    # HUNTER 2.0 geometry (metres); must match patrol.urdf.xacro.
+    wheelbase: 0.650
+    traction_track_width: 0.605
+    steering_track_width: 0.605
+    traction_wheels_radius: 0.165
+    steering_wheels_radius: 0.165
 
     # Driven wheels (right, then left)
     traction_joints_names:
