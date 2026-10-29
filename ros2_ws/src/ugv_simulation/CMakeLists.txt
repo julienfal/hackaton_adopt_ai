@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10...3.30)
 project(ugv_simulation)
 
 find_package(ament_cmake REQUIRED)
