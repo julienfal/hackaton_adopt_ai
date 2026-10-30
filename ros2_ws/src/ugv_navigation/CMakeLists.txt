@@ -37,7 +37,10 @@ ament_target_dependencies(ugv_navigation
 )
 
 
-install(TARGETS ugv_navigation
+add_executable(tracking_evaluator src/tracking_evaluator_node.cpp)
+ament_target_dependencies(tracking_evaluator rclcpp nav_msgs geometry_msgs)
+
+install(TARGETS ugv_navigation tracking_evaluator
   DESTINATION lib/${PROJECT_NAME})
 
 
